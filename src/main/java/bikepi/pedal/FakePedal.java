@@ -1,4 +1,4 @@
-package bikepi;
+package bikepi.pedal;
 
 import java.time.Duration;
 import java.util.Timer;
@@ -8,16 +8,21 @@ import java.util.function.Consumer;
 /**
  * TODO: describe
  */
-public class FakePedalContoller implements PedalController {
+public class FakePedal implements Pedal {
 
-    public FakePedalContoller(Duration dur, final Consumer<Void> consumer) {
+    public FakePedal(Duration dur, final Runnable consumer) {
 
         Timer timer = new Timer("fakePedal", true);
         TimerTask task = new TimerTask() {
 
             @Override
             public void run() {
-                consumer.accept(null);
+                try {
+                    Thread.sleep((long) (Math.random() * dur.toMillis() / 4));
+                } catch (InterruptedException e) {
+                    // ignore
+                }
+                consumer.run();
             }
         };
         timer.schedule(task, dur.toMillis(), dur.toMillis());

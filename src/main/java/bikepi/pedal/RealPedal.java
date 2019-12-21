@@ -1,4 +1,4 @@
-package bikepi;
+package bikepi.pedal;
 
 import java.util.function.Consumer;
 
@@ -14,13 +14,13 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 /**
  * TODO: describe
  */
-public class RealPedalContoller {
+public class RealPedal {
 
     private GpioController controller;
     private Pin pedalPin;
     private GpioPinDigitalInput pedalInput;
 
-    public RealPedalContoller(Pin pin, Consumer<Void> consumer) {
+    public RealPedal(Pin pin, Consumer<Void> consumer) {
         controller = GpioFactory.getInstance();
         pedalPin = pin; //RaspiPin.GPIO_17;
 
